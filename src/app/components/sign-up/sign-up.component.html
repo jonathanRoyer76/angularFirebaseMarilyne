@@ -1,0 +1,52 @@
+<form class ='register' [formGroup]='userForm'>
+  <mat-icon matPrefix>person</mat-icon>
+  <mat-form-field>
+      <input matInput placeholder='Nom' type="text" formControlName="nom" required>
+      <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+  </mat-form-field>
+  <mat-icon matPrefix>person</mat-icon>
+  <mat-form-field>
+      <input matInput placeholder='Prénom' type="text" formControlName="prenom" required>
+      <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+  </mat-form-field>
+  <mat-icon>vpn_key</mat-icon>
+  <mat-form-field>
+      <input matInput placeholder='Mot de passe' type="password" formControlName="password" required>
+      <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+  </mat-form-field>
+  <mat-icon>vpn_key</mat-icon>
+  <mat-form-field>
+      <input matInput placeholder='Confirmer le mot de passe' type="password" formControlName="confirmPassword" required> 
+      <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error> 
+  </mat-form-field>
+  <mat-icon>phone</mat-icon>
+  <mat-form-field>
+      <input matInput type="text" placeholder="01-23-45-67-89 ou 0123456789" formControlName="telPortable">
+  </mat-form-field>
+  <mat-datepicker-toggle [for]="pickerDate"></mat-datepicker-toggle>
+  <mat-datepicker #pickerDate></mat-datepicker>
+  <mat-form-field>      
+    <input matInput [matDatepicker]="pickerDate"  placeholder ='Choisir une date de naissance' formControlName="dateNaissance">
+  </mat-form-field> 
+  <mat-icon>place</mat-icon>
+  <mat-form-field>
+      <input matInput type="text" placeholder ='Adresse' formControlName="adresse">
+  </mat-form-field>
+  <mat-icon>email</mat-icon>
+  <mat-form-field>    
+      <input matInput placeholder='E-mail' type="text" formControlName="mail" required>
+      <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+  </mat-form-field>
+      <div>
+          <mat-icon>add_a_photo</mat-icon>
+          <input type="file" placeholder="Image du profil" (change)="selectionFichier($event)" name="avatar" accept="image/*">
+      </div>
+  <p>
+      <button mat-raised-button color="primary" [disabled]="userForm.invalid" (click)="validation()" name="validation">Valider l'inscription 
+          <mat-icon>send</mat-icon>
+      </button> 
+      <!-- <button mat-raised-button (click)="test()">
+          <mat-icon>build</mat-icon>Test
+      </button> -->
+  </p>
+</form>

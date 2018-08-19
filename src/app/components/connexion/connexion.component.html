@@ -1,0 +1,27 @@
+<div *ngIf='user.isConnected; else elseBlock'>
+  <mat-card>
+      <mat-card-header>            
+              <mat-card-title><h3>{{personne.prenom}}</h3></mat-card-title>
+              <!-- <mat-card-title><h3>{{personne.nom}}</h3></mat-card-title> -->
+          <img #avatar mat-card-avatar mat-card-md-image [src]="user.urlPhoto" >
+          <mat-card-subtitle><a routerLink='/' (click)='deconnexion()'>Déconnexion</a></mat-card-subtitle>
+      </mat-card-header> 
+  </mat-card>    
+</div>
+<ng-template #elseBlock>  
+    <form [formGroup]="userForm">
+        <mat-card>
+            <mat-icon>email</mat-icon>
+            <mat-form-field>
+                <input matInput type="text" formControlName="email" placeholder='E-mail'>                
+            </mat-form-field>
+            <br><i class="material-icons prefix">vpn_key</i>
+            <mat-form-field>
+                <input matInput type="password" formControlName="mdp" placeholder='Mot de passe'>
+                <mat-error></mat-error>
+            </mat-form-field><br>     
+            <button mat-raised-button color="primary" [disabled]="userForm.invalid" (click)="connexion()" name="btnEnvoi" class = "btn z-depth-4">Connexion</button><br/>         
+            <br><a routerLink="/signUp">S'inscrire </a>
+        </mat-card>
+    </form>    
+</ng-template>

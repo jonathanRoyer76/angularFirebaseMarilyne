@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'marilyneAngularFirestore';
+  
+  constructor(){
+    const config = {
+      apiKey: "AIzaSyCwvhcwGXTWN7ARLvu_D7DyVW94pmAGD9Q",
+      authDomain: "marilyne-angular.firebaseapp.com",
+      databaseURL: "https://marilyne-angular.firebaseio.com",
+      projectId: "marilyne-angular",
+      storageBucket: "marilyne-angular.appspot.com",
+      messagingSenderId: "78648895238"
+    };
+    firebase.initializeApp(config); 
+  }
 }
