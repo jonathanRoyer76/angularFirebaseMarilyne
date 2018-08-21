@@ -20,8 +20,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ngOnInit() {    
     this.user = new User();
     this.soucriptionUsers = this.serviceUsers.subjectUser.subscribe(
-      (user: User)=>{
-        this.user=user;
+      (temp: User)=>{
+        this.user=temp;
       }
     );
   }

@@ -18,11 +18,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandlerService, modalErrorHandler } from './services/error-handler.service';
 import { PersonnesService } from './services/personnes.service';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ProfilNounouComponent } from './components/profil-nounou/profil-nounou.component';
+import { ProfilNounouService } from './services/profil-nounou.service';
+import { ContratComponent } from './components/contrat/contrat.component';
 
 const mesRoutes = [
-  { path: 'signUp', component: SignUpComponent },
-  { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-  { path: '**', redirectTo: 'accueil' } 
+  { path: 'signUp', component      : SignUpComponent },
+  { path: 'profilNounou', component: ProfilNounouComponent },
+  { path: 'contrat', component     : ContratComponent },
+  { path: '', redirectTo           : 'accueil', pathMatch: 'full' },
+  { path: '**', redirectTo         : 'accueil' } 
 ];
 
 @NgModule({
@@ -31,7 +36,9 @@ const mesRoutes = [
     ConnexionComponent,
     SideNavComponent,
     modalErrorHandler,
-    SignUpComponent
+    SignUpComponent,
+    ProfilNounouComponent,
+    ContratComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,
@@ -45,7 +52,8 @@ const mesRoutes = [
   providers: [
     UsersService,
     ErrorHandlerService,
-    PersonnesService
+    PersonnesService,
+    ProfilNounouService
   ],
   entryComponents: [
     modalErrorHandler

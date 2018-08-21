@@ -1,0 +1,272 @@
+<mat-tab-group>
+  <mat-tab label="Renseignements">
+    <form [formGroup]='userForm'>
+      <div>
+        <h3 class='h3-contrat'><mat-icon matPrefix>child_care</mat-icon> Enfant</h3> 
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <input matInput placeholder="Nom" formControlName='enfantNom' required>
+          <mat-error *ngIf="userForm.invalid">Champ requis invalide</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" formControlName='enfantPrenom' required>
+          <mat-error *ngIf="userForm.invalid">Champ requis invalide</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]='dateNaissanceEnfant' placeholder="Date de naissance" formControlName="enfantDateNaissance">
+          <mat-datepicker-toggle matPrefix [for]='dateNaissanceEnfant'></mat-datepicker-toggle>
+          <mat-datepicker #dateNaissanceEnfant></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <h3 class='h3-contrat'><mat-icon matPrefix>supervisor_account</mat-icon> Mère</h3>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <input matInput placeholder="Nom" formControlName='mereNom' required>
+          <mat-error *ngIf="userForm.invalid">Champ requis invalide</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" formControlName='merePrenom' required>
+          <mat-error *ngIf="userForm.invalid">Champ requis invalide</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="E-mail" formControlName='mereMail'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Adresse" formControlName='mereAdresse'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Numéro de téléphone" formControlName='mereTelPortable'>
+        </mat-form-field>
+      </div>
+      <div>
+        <h3 class='h3-contrat'><mat-icon matPrefix>supervisor_account</mat-icon> Père</h3>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <input matInput placeholder="Nom" formControlName='pereNom' required>
+          <mat-error *ngIf="userForm.invalid">Champ requis invalide</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" formControlName='perePrenom' required>
+          <mat-error *ngIf="userForm.invalid">Champ requis invalide</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="E-mail" formControlName='pereMail'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Adresse" formControlName='pereAdresse'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Numéro de téléphone" formControlName='pereTelPortable'>
+        </mat-form-field>
+      </div>
+      <div>
+        <h3 class='h3-contrat'><mat-icon matPrefix>person</mat-icon> Tuteur</h3>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <input matInput placeholder="Nom" formControlName='tuteurNom'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" formControlName='tuteurPrenom'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Numéro de téléphone" formControlName='tuteurTelPortable'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Adresse" formControlName='tuteurAdresse'>
+        </mat-form-field>
+      </div>
+      <div>
+        <h3 class='h3-contrat'><mat-icon matPrefix>local_hospital</mat-icon> Médecin de famille</h3>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <input matInput placeholder="Nom" formControlName='medecinNom'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" formControlName='medecinPrenom'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Numéro de téléphone" formControlName='medecinTelPortable'>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Adresse" formControlName='medecinAdresse'>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-tab>
+  <mat-tab label="Contrat">
+    <form [formGroup]='userForm'>
+      <h3 class="h3-contrat"><mat-icon matPrefix>home</mat-icon><i>Conditions d'accueil </i></h3>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Moy d'heures par semaine" (keyup)='calculMoyenneHeuresParMois(); calculSalaireBaseNet(); calculCPBaseBrut()' formControlName="moyHeuresParSemaine">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Moy de semaines par an" (keyup)='calculMoyenneHeuresParMois(); calculMoyenneJoursParMois(); calculSalaireBaseNet()' formControlName="moySemainesParAn">
+        </mat-form-field>  
+        <mat-form-field>
+          <input matInput placeholder="Nb de jours par semaine" (keyup)='calculMoyenneJoursParMois()' formControlName="nbJoursParSemaine">
+        </mat-form-field>               
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput  placeholder="Moy d'heures par mois" formControlName="moyHeuresParMois">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Moy de jours par mois" formControlName="moyJoursParMois">
+          </mat-form-field>
+        <mat-form-field>
+          <input matInput [min]='minDateDebut' [matDatepicker]="datePickerDebut" placeholder="Date de début du contrat" formControlName="dateDebut">
+          <mat-datepicker-toggle matPrefix [for]='datePickerDebut'></mat-datepicker-toggle>
+          <mat-datepicker #datePickerDebut></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [min]='minDateDebut' [matDatepicker]='datePickerfin' placeholder="Date de fin du contrat" formControlName="dateFin">
+          <mat-datepicker-toggle matPrefix [for]='datePickerfin'></mat-datepicker-toggle>
+          <mat-datepicker #datePickerfin></mat-datepicker>
+        </mat-form-field>        
+      </div> 
+      <h3 class="h3-contrat"><mat-icon matPrefix>euro_symbol</mat-icon><i> Rémunération</i></h3>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Taux horaire brut" formControlName="tauxHoraireBrut" #tauxHoraireBrut (keyup)='donneesContrat.contrat.tauxHoraireBrut = tauxHoraireBrut.value'>          
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Taux horaire net" #tauxHoraireNet (keyup)='calculTauxHoraireBrut(tauxHoraireNet.value); calculSalaireBaseNet()' formControlName="tauxHoraireNet">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>        
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Salaire brut mensuel" formControlName="salaireBaseBrut">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Montant CP brut contrat" formControlName="congesPayesBaseBrut">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Total salaire brut mensuel" formControlName="salaireTotalBaseBrut">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>        
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Salaire net mensuel" formControlName="salaireBaseNet">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Montant CP net contrat" formControlName="congesPayesBaseNet">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Total salaire net mensuel" formControlName="salaireTotalBaseNet">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+      </div>
+      <h3 class="h3-contrat"><mat-icon matPrefix>restaurant_menu</mat-icon><i>Indemnités</i></h3>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Repas" #montantRepas (keyup)="donneesContrat.contrat.montantRepas = montantRepas.value" formControlName="montantRepas">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Jounalières" #montantIndemnites (keyup)="donneesContrat.contrat.montantIndemnites = montantIndemnites.value" formControlName="montantIndemnites">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Goûter" #montantGouter (keyup)="donneesContrat.contrat.montantGouter = montantGouter.value" formControlName="montantGouter">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Barème kilométrique" #baremeKm (keyup)="donneesContrat.contrat.baremeKm = baremeKm.value" formControlName="baremeKm">
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+        </mat-form-field>
+      </div>      
+    </form>
+  </mat-tab>
+  <mat-tab label="Planning">
+    <form [formGroup]="userForm">
+      <mat-divider></mat-divider>
+      <h3 class='h3-contrat'><u><i>Lundi</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='lundiArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='lundiDepart'>
+      </mat-form-field>  
+      <h3 class='h3-contrat'><u><i>Mardi</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='mardiArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='mardiDepart'>
+      </mat-form-field>
+      <h3 class='h3-contrat'><u><i>Mercredi</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='mercrediArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='mercrediDepart'>
+      </mat-form-field>
+      <h3 class='h3-contrat'><u><i>Jeudi</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='jeudiArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='jeudiDepart'>
+      </mat-form-field>
+      <h3 class='h3-contrat'><u><i>Vendredi</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='vendrediArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='vendrediDepart'>
+      </mat-form-field>
+      <h3 class='h3-contrat'><u><i>Samedi</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='samediArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='samediDepart'>
+      </mat-form-field>
+      <h3 class='h3-contrat'><u><i>Dimanche</i></u></h3>
+      <label>Heure d'arrivée : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='dimancheArrivee'>
+      </mat-form-field>
+      <label>Heure de départ : </label>
+      <mat-form-field>
+        <input matInput placeholder="HH:MM" formControlName='dimancheDepart'>
+      </mat-form-field>
+    </form>    
+  </mat-tab>
+</mat-tab-group>
+<a routerLink='' mat-raised-button>
+  <mat-icon matPrefix>cancel</mat-icon>
+  Annuler
+</a>
+<button mat-raised-button [disabled]="userForm.invalid" color="primary" (click)='envoiContrat()'>
+  Valider le contrat
+  <mat-icon matSuffix>send</mat-icon>
+</button>
+<!-- <button mat-raised-button color="primary" (click)='test()'>
+    Test 
+    <mat-icon matSuffix>build</mat-icon>
+</button>  -->

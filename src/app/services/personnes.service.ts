@@ -32,13 +32,11 @@ export class PersonnesService {
   //Définit la personne connectée au site
   setPersonneConnecte(personne: Personne){
     this.personneConnecte=personne;
+    this.emitSubjectPersonne();
   }
 
   //procédure d'enregistrement d'une nouveau Personne
-  registerNewPersonne(personne: Personne, fichier?: File): Observable<boolean>{
-    const firestore = firebase.firestore();
-    const settings = {timestampsInSnapshots: true};
-    firestore.settings(settings);    
+  registerNewPersonne(personne: Personne, fichier?: File): Observable<boolean>{       
     return new Observable<boolean>((observer)=>{
       if (fichier){
         let emplacement = 'avatars/'+Date.now()+fichier.name;

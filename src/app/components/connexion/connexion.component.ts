@@ -8,7 +8,7 @@ import { ErrorHandlerService, modalErrorHandler } from '../../services/error-han
 
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material'
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector   : 'app-connexion',
@@ -56,22 +56,23 @@ export class ConnexionComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
-    this.souscriptionUser = this.serviceUsers.subjectUser.subscribe(
-      (user: User)=>{
-        this.user=user;
-        this.snackBar.open("Bienvenue " + ((this.personne.prenom)?this.personne.prenom:`visiteur`) + '.', 'Fermer', {
-          duration: 2500}
-        )
-    },
-    (error)=>{
-      this.serviceErreur.afficheErreur(`Erreur lors de la connexion de l'utilisateur`, error)
-    });
+    
     this.souscriptionPersonne = this.servicePersonne.subjectPersonne.subscribe(
       (personne: Personne)=>{
         //La connexion a été établie, on a récupéré les données de la personne connectée
         this.personne=personne;
+        this.snackBar.open("Bienvenue " + ((this.personne.prenom)?this.personne.prenom:`visiteur`) + '.', 'Fermer', {
+          duration: 2500}
+        )
     },
     //une erreur s'est produite
+    (error)=>{
+      this.serviceErreur.afficheErreur(`Erreur lors de la connexion de l'utilisateur`, error)
+    });
+    this.souscriptionUser = this.serviceUsers.subjectUser.subscribe(
+      (user: User)=>{
+        this.user=user;        
+    },
     (error)=>{
       this.serviceErreur.afficheErreur(`Erreur lors de la connexion de l'utilisateur`, error)
     });

@@ -2,8 +2,8 @@
   <mat-card>
       <mat-card-header>            
               <mat-card-title><h3>{{personne.prenom}}</h3></mat-card-title>
-              <!-- <mat-card-title><h3>{{personne.nom}}</h3></mat-card-title> -->
-          <img #avatar mat-card-avatar mat-card-md-image [src]="user.urlPhoto" >
+              <mat-card-title><h3>{{personne.nom}}</h3></mat-card-title>
+          <img #avatar mat-card-avatar mat-card-md-image [src]="personne.urlPhoto" >
           <mat-card-subtitle><a routerLink='/' (click)='deconnexion()'>Déconnexion</a></mat-card-subtitle>
       </mat-card-header> 
   </mat-card>    

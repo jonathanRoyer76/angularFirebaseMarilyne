@@ -46,14 +46,12 @@ export class SignUpComponent implements OnInit {
   }
 
   validation(){
-    // 3. enregistrer la photo dans le storage
-    // 4. lier cette photo a la propriété photo de user dans la bdd
 
     let user       = new User();
     let personne   :Personne=new Personne();
     let formulaire = this.userForm.value;    
     
-    // if (formulaire['password'] == formulaire['confirmPassword']){
+    if (formulaire['password'] == formulaire['confirmPassword']){
       user.email    = formulaire['mail'];
       user.mdp      = formulaire['password'];    
       personne.nom           = formulaire['nom'];
@@ -75,9 +73,9 @@ export class SignUpComponent implements OnInit {
         }
         this.snackBar.open('Enregistrement effectué','Fermer', {duration: 2500});
       });      
-    // }else{
-    //   this.serviceErreur.afficheErreur('Erreur de saisie :','Les mots de passe sont différents')
-    // }
+    }else{
+      this.serviceErreur.afficheErreur('Erreur de saisie :','Les mots de passe sont différents')
+    }
   }
 
   selectionFichier(event){

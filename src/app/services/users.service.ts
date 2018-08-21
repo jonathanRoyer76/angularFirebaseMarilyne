@@ -3,6 +3,8 @@ import { User } from '../classes/user';
 import { Subject, Observable, observable } from 'rxjs';
 import * as firebase from 'firebase';
 import { ErrorHandlerService } from './error-handler.service';
+import { PersonnesService } from './personnes.service';
+import { Personne } from '../classes/personne';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +15,32 @@ export class UsersService {
   subjectUser= new Subject<User>();
 
   constructor(
-    private serviceErreur : ErrorHandlerService
+    private serviceErreur  : ErrorHandlerService,
+    private servicePersonne: PersonnesService
   ) { 
     firebase.auth().onAuthStateChanged(
       (user)=>{
+        let personne = new Personne();
         if (user){
           this.userConnecte             = new User();
           this.userConnecte.email       = user.email;  
           this.userConnecte.urlPhoto    = user.photoURL;
-          this.userConnecte.isConnected = true;
-          //Récupérer les infos du user pour déterminer son status et sa photo
-          this.userConnecte.status='Administrateur'    
+          this.userConnecte.isConnected = true;                    
+          firebase.firestore().collection('personnes').where('mail','==',user.email).get().then(snap=>{
+            if (!snap.empty){
+              personne.actif         = snap.docs[0].data()['actif']
+              personne.adresse       = snap.docs[0].data()['adresse']
+              personne.dateNaissance = snap.docs[0].data()['dateNaissance']
+              personne.mail          = snap.docs[0].data()['mail']
+              personne.nom           = snap.docs[0].data()['nom']
+              personne.prenom        = snap.docs[0].data()['prenom']
+              personne.status        = snap.docs[0].data()['status']
+              personne.telPortable   = snap.docs[0].data()['telPortable']
+              personne.urlPhoto      = snap.docs[0].data()['urlPhoto']
+            }
+            this.servicePersonne.setPersonneConnecte(personne)        
+            this.userConnecte.status=personne.status
+          })
         }else{
           this.userConnecte=new User();
         }
