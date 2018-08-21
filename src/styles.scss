@@ -30,28 +30,6 @@ $mat-light-theme-foreground: (
 $myTheme: mat-light-theme($myPrimary, $myAccent, $myWarn);
 @include angular-material-theme($myTheme);
 
-// @mixin my_mat_card{
-//     .myMatCard{
-//         max-width: 250px;
-//         margin: 1% 1%;
-//     }
-//     .imageMatCard{
-//         background-size: cover;
-//     }
-// }
-
-// @mixin myFormulaire($myTheme){
-//     .register{
-//         @include mat-form-field-theme($myTheme);
-//         @include mat-sidenav-theme($myTheme);        
-//     }
-// }
-
-// @include my_mat_card;
-// @include mat-form-field-theme($myTheme);
-// @include mat-sidenav-theme($myTheme);
-// @include myFormulaire($myTheme);
-
 #conteneur{
     display: flex;
     justify-content: center; 

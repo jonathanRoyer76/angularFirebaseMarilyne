@@ -69,6 +69,7 @@ export class ConnexionComponent implements OnInit {
     (error)=>{
       this.serviceErreur.afficheErreur(`Erreur lors de la connexion de l'utilisateur`, error)
     });
+    
     this.souscriptionUser = this.serviceUsers.subjectUser.subscribe(
       (user: User)=>{
         this.user=user;        
