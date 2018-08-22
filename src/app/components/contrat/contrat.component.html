@@ -1,6 +1,6 @@
-<mat-tab-group>
-  <mat-tab label="Renseignements">
-    <form [formGroup]='userForm'>
+<mat-tab-group>   
+  <mat-tab label="Renseignements"> 
+    <form [formGroup]='userForm'>   
       <div>
         <h3 class='h3-contrat'><mat-icon matPrefix>child_care</mat-icon> Enfant</h3> 
         <mat-divider></mat-divider>
@@ -17,7 +17,7 @@
           <mat-datepicker-toggle matPrefix [for]='dateNaissanceEnfant'></mat-datepicker-toggle>
           <mat-datepicker #dateNaissanceEnfant></mat-datepicker>
         </mat-form-field>
-      </div>
+      </div> 
       <div>
         <h3 class='h3-contrat'><mat-icon matPrefix>supervisor_account</mat-icon> Mère</h3>
         <mat-divider></mat-divider>
@@ -94,19 +94,22 @@
       </div>
     </form>
   </mat-tab>
-  <mat-tab label="Contrat">
-    <form [formGroup]='userForm'>
+  <mat-tab label="Contrat"> 
+    <form [formGroup]='userForm'> 
       <h3 class="h3-contrat"><mat-icon matPrefix>home</mat-icon><i>Conditions d'accueil </i></h3>
       <mat-divider></mat-divider>
       <div>
         <mat-form-field>
-          <input matInput placeholder="Moy d'heures par semaine" (keyup)='calculMoyenneHeuresParMois(); calculSalaireBaseNet(); calculCPBaseBrut()' formControlName="moyHeuresParSemaine">
+          <input matInput placeholder="Moy d'heures par semaine" formControlName="moyHeuresParSemaine">
+          <!-- <input matInput placeholder="Moy d'heures par semaine" (keyup)='calculMoyenneHeuresParMois(); calculSalaireBaseNet(); calculCPBaseBrut()' formControlName="moyHeuresParSemaine"> -->
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Moy de semaines par an" (keyup)='calculMoyenneHeuresParMois(); calculMoyenneJoursParMois(); calculSalaireBaseNet()' formControlName="moySemainesParAn">
+          <input matInput placeholder="Moy de semaines par an" formControlName="moySemainesParAn">
+          <!-- <input matInput placeholder="Moy de semaines par an" (keyup)='calculMoyenneHeuresParMois(); calculMoyenneJoursParMois(); calculSalaireBaseNet()' formControlName="moySemainesParAn"> -->
         </mat-form-field>  
         <mat-form-field>
-          <input matInput placeholder="Nb de jours par semaine" (keyup)='calculMoyenneJoursParMois()' formControlName="nbJoursParSemaine">
+          <input matInput placeholder="Nb de jours par semaine" formControlName="nbJoursParSemaine">
+          <!-- <input matInput placeholder="Nb de jours par semaine" (keyup)='calculMoyenneJoursParMois()' formControlName="nbJoursParSemaine"> -->
         </mat-form-field>               
       </div>
       <div>
@@ -131,18 +134,20 @@
       <mat-divider></mat-divider>
       <div>
         <mat-form-field>
-          <input matInput placeholder="Taux horaire brut" formControlName="tauxHoraireBrut" #tauxHoraireBrut (keyup)='donneesContrat.contrat.tauxHoraireBrut = tauxHoraireBrut.value'>          
+          <input matInput placeholder="Taux horaire brut" formControlName="tauxHoraireBrut" >          
+          <!-- <input matInput placeholder="Taux horaire brut" formControlName="tauxHoraireBrut" #tauxHoraireBrut (keyup)='donneesContrat.contrat.tauxHoraireBrut = tauxHoraireBrut.value'>           -->
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Taux horaire net" #tauxHoraireNet (keyup)='calculTauxHoraireBrut(tauxHoraireNet.value); calculSalaireBaseNet()' formControlName="tauxHoraireNet">
+          <input matInput placeholder="Taux horaire net" formControlName="tauxHoraireNet">
+          <!-- <input matInput placeholder="Taux horaire net" #tauxHoraireNet (keyup)='calculTauxHoraireBrut(tauxHoraireNet.value); calculSalaireBaseNet()' formControlName="tauxHoraireNet"> -->
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>        
       </div>
       <div>
         <mat-form-field>
           <input matInput placeholder="Salaire brut mensuel" formControlName="salaireBaseBrut">
-          <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
+          <span matSuffix><mat-icon>euro_symbol</mat-icon></span> 
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Montant CP brut contrat" formControlName="congesPayesBaseBrut">
@@ -190,7 +195,7 @@
     </form>
   </mat-tab>
   <mat-tab label="Planning">
-    <form [formGroup]="userForm">
+    <form [formGroup]='userForm'>
       <mat-divider></mat-divider>
       <h3 class='h3-contrat'><u><i>Lundi</i></u></h3>
       <label>Heure d'arrivée : </label>
@@ -254,11 +259,11 @@
       <label>Heure de départ : </label>
       <mat-form-field>
         <input matInput placeholder="HH:MM" formControlName='dimancheDepart'>
-      </mat-form-field>
-    </form>    
+      </mat-form-field>   
+    </form>
   </mat-tab>
 </mat-tab-group>
-<a routerLink='' mat-raised-button>
+<a routerLink='' mat-raised-button> 
   <mat-icon matPrefix>cancel</mat-icon>
   Annuler
 </a>
@@ -266,7 +271,7 @@
   Valider le contrat
   <mat-icon matSuffix>send</mat-icon>
 </button>
-<!-- <button mat-raised-button color="primary" (click)='test()'>
+<button mat-raised-button color="primary" (click)='test()'>
     Test 
     <mat-icon matSuffix>build</mat-icon>
-</button>  -->
+</button> 
