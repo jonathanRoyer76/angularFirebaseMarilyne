@@ -4,6 +4,7 @@ import { Contrat } from '../classes/contrat';
 import { ErrorHandlerService } from './error-handler.service';
 import * as firebase from 'firebase'
 import { DonneesContrat } from '../classes/donneesContrat';
+import { PersonnesService } from './personnes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,27 @@ export class ContratService {
   contrat : Contrat = new Contrat();
 
   constructor(
-    private serviceErreurs: ErrorHandlerService
+    private serviceErreurs : ErrorHandlerService,
+    private servicePersonne: PersonnesService
   ) { }
 
   // Ajoute un contrat
-  registerNewContrat(pDonneesContrat: DonneesContrat):Observable<boolean>{
+  registerNewContrat(pDonneesContrat: DonneesContrat):Observable<boolean>{    
     return new Observable<boolean>(observer=>{
       firebase.firestore().collection('contrats').doc(pDonneesContrat.enfant.nom+'_'+pDonneesContrat.enfant.prenom).set(
         JSON.parse(JSON.stringify(pDonneesContrat))
       ).then(()=>{
+        this.servicePersonne.checkAndAddPersonne(pDonneesContrat.docteur);
+        this.servicePersonne.checkAndAddPersonne(pDonneesContrat.mere);
+        this.servicePersonne.checkAndAddPersonne(pDonneesContrat.pere);
+        this.servicePersonne.checkAndAddPersonne(pDonneesContrat.tuteur);
+        this.servicePersonne.checkAndAddPersonne(pDonneesContrat.enfant);
         observer.next(true); 
       },(error)=>{
         observer.next(false); 
       })
     });
-  }
+  }  
 
   // Modifie un contrat
   updateContrat():Observable<boolean>{
@@ -51,7 +58,6 @@ export class ContratService {
       firebase.firestore().collection('contrats').get().then(bdd=>{
         if (bdd){
           bdd.docs.forEach(temp=>{
-            // console.log(temp.id, " => ", temp.data()); 
             retour.push(JSON.parse(JSON.stringify(temp.data()))) 
           })
         }else console.log('retour vide')

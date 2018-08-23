@@ -8,6 +8,7 @@ import { ProfilNounouService } from '../../services/profil-nounou.service';
 import { profilNounou } from '../../classes/profilNounou';
 import { ContratService } from '../../services/contrat.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-contrat',
@@ -24,7 +25,8 @@ export class ContratComponent implements OnInit {
     private formBuilder        : FormBuilder,
     private serviceProfilNounou: ProfilNounouService,
     private serviceContrat     : ContratService,
-    private router             : Router
+    private router             : Router,
+    private snackBar           : MatSnackBar
   ) { }    
 
   envoiContrat(){
@@ -89,7 +91,9 @@ export class ContratComponent implements OnInit {
     //Appeler la méthode du service   
     this.serviceContrat.registerNewContrat(this.donneesContrat).subscribe(retour=>{
       if (retour){
-        // Rediriger vers l'accueil
+        this.snackBar.open('Enregistrement effectué', 'Fermer', {
+          duration: 2500}
+        )
       }
     }); 
   }
