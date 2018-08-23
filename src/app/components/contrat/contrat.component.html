@@ -100,24 +100,21 @@
       <mat-divider></mat-divider>
       <div>
         <mat-form-field>
-          <input matInput placeholder="Moy d'heures par semaine" formControlName="moyHeuresParSemaine">
-          <!-- <input matInput placeholder="Moy d'heures par semaine" (keyup)='calculMoyenneHeuresParMois(); calculSalaireBaseNet(); calculCPBaseBrut()' formControlName="moyHeuresParSemaine"> -->
+          <input matInput placeholder="Moy d'heures par semaine" formControlName="nbHeuresGardeSemaine" (keyup)='majNbHeuresGardeSemaine()'>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Moy de semaines par an" formControlName="moySemainesParAn">
-          <!-- <input matInput placeholder="Moy de semaines par an" (keyup)='calculMoyenneHeuresParMois(); calculMoyenneJoursParMois(); calculSalaireBaseNet()' formControlName="moySemainesParAn"> -->
+          <input matInput placeholder="Moy de semaines par an" formControlName="nbSemainesGardeAn" (keyup)='majNbSemainesGardeAn()'>
         </mat-form-field>  
         <mat-form-field>
-          <input matInput placeholder="Nb de jours par semaine" formControlName="nbJoursParSemaine">
-          <!-- <input matInput placeholder="Nb de jours par semaine" (keyup)='calculMoyenneJoursParMois()' formControlName="nbJoursParSemaine"> -->
+          <input matInput placeholder="Nb de jours par semaine" formControlName="nbJoursGardeSemaine" (keyup)='majNbJoursGardeSemaine()'>
         </mat-form-field>               
       </div>
       <div>
         <mat-form-field>
-          <input matInput  placeholder="Moy d'heures par mois" formControlName="moyHeuresParMois">
+          <input matInput  placeholder="Moy d'heures par mois" formControlName="moyNbHeuresGardeMois">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Moy de jours par mois" formControlName="moyJoursParMois">
+            <input matInput placeholder="Moy de jours par mois" formControlName="moyNbJoursGardeMois">
           </mat-form-field>
         <mat-form-field>
           <input matInput [min]='minDateDebut' [matDatepicker]="datePickerDebut" placeholder="Date de début du contrat" formControlName="dateDebut">
@@ -135,12 +132,10 @@
       <div>
         <mat-form-field>
           <input matInput placeholder="Taux horaire brut" formControlName="tauxHoraireBrut" >          
-          <!-- <input matInput placeholder="Taux horaire brut" formControlName="tauxHoraireBrut" #tauxHoraireBrut (keyup)='donneesContrat.contrat.tauxHoraireBrut = tauxHoraireBrut.value'>           -->
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Taux horaire net" formControlName="tauxHoraireNet">
-          <!-- <input matInput placeholder="Taux horaire net" #tauxHoraireNet (keyup)='calculTauxHoraireBrut(tauxHoraireNet.value); calculSalaireBaseNet()' formControlName="tauxHoraireNet"> -->
+          <input matInput placeholder="Taux horaire net" formControlName="tauxHoraireNet" (keyup)='majTauxHoraireNet()'>
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>        
       </div>
@@ -176,19 +171,19 @@
       <mat-divider></mat-divider>
       <div>
         <mat-form-field>
-          <input matInput placeholder="Repas" #montantRepas (keyup)="donneesContrat.contrat.montantRepas = montantRepas.value" formControlName="montantRepas">
+          <input matInput placeholder="Repas" formControlName="montantRepas">
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Jounalières" #montantIndemnites (keyup)="donneesContrat.contrat.montantIndemnites = montantIndemnites.value" formControlName="montantIndemnites">
+          <input matInput placeholder="indemnités jounalières" formControlName="montantIndemnites">
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Goûter" #montantGouter (keyup)="donneesContrat.contrat.montantGouter = montantGouter.value" formControlName="montantGouter">
+          <input matInput placeholder="Goûter" formControlName="montantGouter">
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Barème kilométrique" #baremeKm (keyup)="donneesContrat.contrat.baremeKm = baremeKm.value" formControlName="baremeKm">
+          <input matInput placeholder="Barème kilométrique" formControlName="baremeKm">
           <span matSuffix><mat-icon>euro_symbol</mat-icon></span>
         </mat-form-field>
       </div>      
@@ -268,6 +263,7 @@
   Annuler
 </a>
 <button mat-raised-button [disabled]="userForm.invalid" color="primary" (click)='envoiContrat()'>
+<!-- <button mat-raised-button color="primary" (click)='envoiContrat()'> -->
   Valider le contrat
   <mat-icon matSuffix>send</mat-icon>
 </button>

@@ -21,13 +21,17 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ProfilNounouComponent } from './components/profil-nounou/profil-nounou.component';
 import { ProfilNounouService } from './services/profil-nounou.service';
 import { ContratComponent } from './components/contrat/contrat.component';
+import { ListeContratsComponent } from './components/liste-contrats/liste-contrats.component';
+import { ListePersonnesComponent } from './components/liste-personnes/liste-personnes.component';
 
 const mesRoutes = [
   { path: 'signUp', component      : SignUpComponent },
   { path: 'profilNounou', component: ProfilNounouComponent },
   { path: 'contrat', component     : ContratComponent },
+  { path: 'contrats', component    : ListeContratsComponent },
+  { path: 'personnes', component   : ListePersonnesComponent },
   { path: '', redirectTo           : 'accueil', pathMatch: 'full' },
-  { path: '**', redirectTo         : 'accueil' } 
+  { path: '**', redirectTo         : 'accueil' }   
 ];
 
 @NgModule({
@@ -38,7 +42,9 @@ const mesRoutes = [
     modalErrorHandler,
     SignUpComponent,
     ProfilNounouComponent,
-    ContratComponent
+    ContratComponent,
+    ListeContratsComponent,
+    ListePersonnesComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,

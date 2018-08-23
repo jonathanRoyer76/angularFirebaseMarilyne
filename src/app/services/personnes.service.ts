@@ -69,28 +69,9 @@ export class PersonnesService {
           })
           observer.next(true);
         })
-        // observer.next(true);
       }else{
-        console.log('fichier absent')
         observer.next(false) 
       }
-      // observer.next(false)
-      // firebase.firestore().collection('personnes').doc(personne.nom+'_'+personne.prenom).set({
-      //   nom          : personne.nom,
-      //   prenom       : personne.prenom,
-      //   dateNaissance: personne.dateNaissance,
-      //   adresse      : personne.adresse,
-      //   telPortable  : personne.telPortable,
-      //   mail         : personne.mail,
-      //   actif        : personne.actif,
-      //   status       : personne.status,
-      //   urlPhoto     : personne.urlPhoto  
-      // }).then(()=>{
-      //   observer.next(true);
-      // },(error)=>{
-      //   this.serviceError.afficheErreur('Erreur survenur lors de l\ajout', error);
-      //   observer.next(false);
-      // })
     });
   }
 
@@ -106,19 +87,7 @@ export class PersonnesService {
         observer.next('echec')
       }
       let emplacement = 'avatars/'+Date.now()+fichier.name;
-      console.log(emplacement)
       let upload = firebase.storage().ref().child(emplacement).put(fichier);
-      // upload.on(firebase.storage.TaskEvent.STATE_CHANGED,()=>{
-      //   // Chargement en cours
-      // },
-      // (error)=>{
-      //   this.serviceError.afficheErreur('Erreur lors du chargement de la photo','Erreur inconnue')
-      //   observer.next('echec')
-      // },
-      // ()=>{
-      //   console.log(firebase.storage().ref().getDownloadURL())
-      //   observer.next('reussi') 
-      // })
     })
   }
 }

@@ -1,0 +1,10 @@
+<div id="conteneur">
+    <mat-card *ngFor="let temp of tableSource" class="myMatCard">
+        <mat-card-header class="myTitleCard">            
+          <mat-card-title>{{temp.prenom}} {{temp.nom}} {{temp.avatar}}</mat-card-title> 
+          <mat-card-subtitle>{{temp.status}}</mat-card-subtitle>
+        </mat-card-header> 
+    <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}">
+        <!-- <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}" alt="Mon image par défaut" /> -->
+    </mat-card>
+</div>
