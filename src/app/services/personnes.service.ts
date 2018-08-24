@@ -129,6 +129,18 @@ export class PersonnesService {
     })
   }
 
+  // Retrouve une personne en fonction de son mail
+  getPersonneByMail(mail: string):Observable<Personne>{
+    return new Observable<Personne>(observer=>{
+      firebase.firestore().collection('personnes').where('mail','==',mail).get().then(snap=>{
+        if (!snap.empty){
+          this.personneConnecte = JSON.parse(JSON.stringify(snap.docs[0].data()))
+          observer.next(this.personneConnecte) 
+        }else observer.next(null)
+      })
+    })
+  }
+
   //enregistre l'avatar sur le serveur
   uploadAvatarUser(fichier :File){   
     return new Observable<string>((observer)=>{

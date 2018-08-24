@@ -8,7 +8,7 @@ import { ProfilNounouService } from '../../services/profil-nounou.service';
 import { profilNounou } from '../../classes/profilNounou';
 import { ContratService } from '../../services/contrat.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, DateAdapter } from '@angular/material';
 
 @Component({
   selector: 'app-contrat',
@@ -26,7 +26,8 @@ export class ContratComponent implements OnInit {
     private serviceProfilNounou: ProfilNounouService,
     private serviceContrat     : ContratService,
     private router             : Router,
-    private snackBar           : MatSnackBar
+    private snackBar           : MatSnackBar,
+    private adapter            : DateAdapter<any>
   ) { }    
 
   envoiContrat(){
@@ -37,7 +38,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.enfant.dateNaissance = formulaire['enfantDateNaissance'];
     this.donneesContrat.enfant.status        = 'Enfant';
     this.donneesContrat.enfant.actif         = 'true';
-    this.donneesContrat.enfant.urlPhoto      = 'https: //firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-enfant.jpg?alt=media&token=8818f30c-6946-4622-8856-e7ab4887126f';
+    this.donneesContrat.enfant.urlPhoto      = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-enfant.png?alt=media&token=6be070ec-b928-4b9b-b294-dd20ff3590ff';
     // Données mère
     this.donneesContrat.mere.nom         = formulaire['mereNom'];
     this.donneesContrat.mere.prenom      = formulaire['merePrenom'];
@@ -46,7 +47,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.mere.telPortable = formulaire['mereTelPortable'];
     this.donneesContrat.mere.actif       = 'true';
     this.donneesContrat.mere.status      = 'Parent';
-    this.donneesContrat.mere.urlPhoto    = 'https: //firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-femme.svg?alt=media&token=11a82e9c-3aa7-45e2-a937-9fcfb51ba923';
+    this.donneesContrat.mere.urlPhoto    = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-femme.png?alt=media&token=4287257a-823d-4fd2-9c3b-efd240998e61';
     // Données père
     this.donneesContrat.pere.nom         = formulaire['pereNom'];
     this.donneesContrat.pere.prenom      = formulaire['perePrenom'];
@@ -55,7 +56,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.pere.telPortable = formulaire['pereTelPortable'];
     this.donneesContrat.pere.actif       = 'true';
     this.donneesContrat.pere.status      = 'Parent';
-    this.donneesContrat.pere.urlPhoto    = 'https: //firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-homme.svg?alt=media&token=a5d989cd-fae6-404c-a5ec-9ca4293a0786';
+    this.donneesContrat.pere.urlPhoto    = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-homme.png?alt=media&token=6b77087f-3104-496b-94ea-32a783661c13';
     // Données tuteur
     this.donneesContrat.tuteur.nom         = formulaire['tuteurNom'];
     this.donneesContrat.tuteur.prenom      = formulaire['tuteurPrenom'];
@@ -71,7 +72,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.docteur.adresse     = formulaire['medecinAdresse'];
     this.donneesContrat.docteur.actif       = 'true';
     this.donneesContrat.docteur.status      = 'Medecin';
-    this.donneesContrat.docteur.urlPhoto    = 'https: //firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-medecin.jpg?alt=media&token=912889cf-ee89-431e-8492-81e98975e23f';
+    this.donneesContrat.docteur.urlPhoto    = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-medecin.png?alt=media&token=4c4b1aff-b05b-4f47-94fe-2047d5495cfb';
     // Données contrat déjà remplies
     // Données planning
     this.donneesContrat.planning.lundi.heureArrivee    = formulaire['lundiArrivee']
@@ -99,6 +100,7 @@ export class ContratComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.adapter.setLocale('fr-FR');
     this.initForm();
     this.getProfilNounou();     
     this.donneesContrat          = new DonneesContrat();
@@ -271,8 +273,4 @@ export class ContratComponent implements OnInit {
       if (retour) this.mapObjetContratVersFormulaire(retour);
     })
   }
-
-  // test(){
-  //   console.log(this.userForm.get('enfantNom').value)
-  // }
 }

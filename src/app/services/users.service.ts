@@ -26,25 +26,16 @@ export class UsersService {
           this.userConnecte.email       = user.email;  
           this.userConnecte.urlPhoto    = user.photoURL;
           this.userConnecte.isConnected = true;                    
-          firebase.firestore().collection('personnes').where('mail','==',user.email).get().then(snap=>{
-            if (!snap.empty){
-              personne.actif         = snap.docs[0].data()['actif']
-              personne.adresse       = snap.docs[0].data()['adresse']
-              personne.dateNaissance = snap.docs[0].data()['dateNaissance']
-              personne.mail          = snap.docs[0].data()['mail']
-              personne.nom           = snap.docs[0].data()['nom']
-              personne.prenom        = snap.docs[0].data()['prenom']
-              personne.status        = snap.docs[0].data()['status']
-              personne.telPortable   = snap.docs[0].data()['telPortable']
-              personne.urlPhoto      = snap.docs[0].data()['urlPhoto']
+          this.servicePersonne.getPersonneByMail(user.email).subscribe(personne=>{            
+            if (personne){
+              this.userConnecte.status=personne.status
+              this.servicePersonne.emitSubjectPersonne();
+              this.emitSubjectUser();
             }
-            this.servicePersonne.setPersonneConnecte(personne)        
-            this.userConnecte.status=personne.status
-          })
-        }else{
+          })          
+        }else{ 
           this.userConnecte=new User();
         }
-        this.emitSubjectUser();
       }
     )
   }

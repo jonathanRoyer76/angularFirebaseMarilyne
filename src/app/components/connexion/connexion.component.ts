@@ -37,9 +37,7 @@ export class ConnexionComponent implements OnInit {
     let userTemp = new User();
     userTemp.email=formulaire['email'];
     userTemp.mdp = formulaire['mdp'];
-    //se connecter via firebase.auth().signin et récupérer les infos personnes 
-    // pour les placer dans un objet personne
-    this.serviceUsers.signIn(userTemp);
+    this.serviceUsers.signIn(userTemp); 
   }
 
   //Déconnecte l'utilisateur
@@ -77,6 +75,7 @@ export class ConnexionComponent implements OnInit {
     (error)=>{
       this.serviceErreur.afficheErreur(`Erreur lors de la connexion de l'utilisateur`, error)
     });
+    if (this.userForm.value['email']!='' && this.userForm.value['mdp']!='') this.connexion();
   }
 
   ngOnDestroy(){

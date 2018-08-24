@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContratService } from '../../services/contrat.service';
-import { DonneesContrat } from '../../classes/donneesContrat';
+import { PersonnesService } from '../../services/personnes.service';
 
 @Component({
   selector: 'app-liste-personnes',
@@ -9,16 +8,15 @@ import { DonneesContrat } from '../../classes/donneesContrat';
 })
 export class ListePersonnesComponent implements OnInit {
 
-  listeDonneesContrat: DonneesContrat[]
+  listePersonnes =[]
 
   constructor(
-    private serviceContrat: ContratService
+    private servicePersonne: PersonnesService
   ) { }
 
   ngOnInit() {
-    this.serviceContrat.getListeContrats().subscribe(retour=>{
-      console.log(retour) 
-    })
+    this.servicePersonne.getListePersonnes().subscribe(retour=>{
+this.listePersonnes=retour;    })
   }
 
 }

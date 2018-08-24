@@ -30,6 +30,16 @@ $mat-light-theme-foreground: (
 $myTheme: mat-light-theme($myPrimary, $myAccent, $myWarn);
 @include angular-material-theme($myTheme);
 
+
+.myMatCard{
+    max-width: 125px;
+    margin: 1% 1%;
+}
+
+.imageMatCard{
+    background-size: cover;
+}
+
 #conteneur{
     display: flex;
     justify-content: center; 
