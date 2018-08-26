@@ -10,12 +10,12 @@ export class AppComponent {
   
   constructor(){
     const config = {
-      apiKey: "AIzaSyCwvhcwGXTWN7ARLvu_D7DyVW94pmAGD9Q",
-      authDomain: "marilyne-angular.firebaseapp.com",
-      databaseURL: "https://marilyne-angular.firebaseio.com",
-      projectId: "marilyne-angular",
-      storageBucket: "marilyne-angular.appspot.com",
-      messagingSenderId: "78648895238"
+      apiKey: "AIzaSyDhV8nVBIu81DVQ7LnSUXIfT2tagiye7X8",
+      authDomain: "marilyne-royer.firebaseapp.com",
+      databaseURL: "https://marilyne-royer.firebaseio.com",
+      projectId: "marilyne-royer",
+      storageBucket: "marilyne-royer.appspot.com",
+      messagingSenderId: "972596999367"
     };
     firebase.initializeApp(config); 
     const firestore = firebase.firestore();

@@ -35,6 +35,8 @@ export class UsersService {
           })          
         }else{ 
           this.userConnecte=new User();
+          this.userConnecte.isConnected=false;
+          this.emitSubjectUser();
         }
       }
     )

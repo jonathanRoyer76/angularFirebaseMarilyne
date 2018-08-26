@@ -61,6 +61,6 @@ export class ListePersonnesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.souscriptionFiltre.unsubscribe();
+    
   }
 }
