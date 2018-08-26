@@ -32,30 +32,31 @@
                   </p>
                   </mat-expansion-panel>                
               <mat-expansion-panel>
-                  <mat-expansion-panel-header>
+                    <mat-expansion-panel-header>
                       <mat-icon>person</mat-icon>
                       Personnes                    
-                  </mat-expansion-panel-header>
-                  <p>
-                      <a routerLink="/personnes">Liste des personnes</a>
-                  </p>
-                  <p>
-                      <a routerLink = "/SignUp">Ajouter un utilisateur</a>
-                  </p>
-                  <p>
-                      <a routerLink = "/SignUp">Ajouter une personne</a>
-                  </p>
-                  <p>
-                      <a (click)="updateProfile()">Modifier un compte utilisateur</a> 
-                  </p>
-                  </mat-expansion-panel>  
+                    </mat-expansion-panel-header>
+                    <p>
+                        <a routerLink="/personnes">Liste des personnes   </a>
+                        <mat-checkbox name="filtrePersonnes" color="primary" (click)="changementFiltre()" [(ngModel)]="chkTous" autocomplete="off">Afficher les personnes inactives</mat-checkbox> 
+                    </p>
+                    <p>
+                        <a routerLink = "/SignUp">Ajouter une personne</a> 
+                    </p>
+                    <p>
+                        <a routerLink = "/SignUp">Ajouter un utilisateur</a>
+                    </p>
+                    <p>
+                        <a (click)="updateProfile()">Modifier un compte utilisateur</a> 
+                    </p>
+                    </mat-expansion-panel>  
             <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-icon>face</mat-icon>
               Nounou
             </mat-expansion-panel-header>
             <p>
-              <a routerLink="/profilNounou">Enregistrer les données contractuelles </a>
+              <a routerLink="/profilNounou">Données contractuelles </a>
             </p>
             <p>
               <a (click)="updateProfileNounou()">Modifier le profil utilisateur</a>

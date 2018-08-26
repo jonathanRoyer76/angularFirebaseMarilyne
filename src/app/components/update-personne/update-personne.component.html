@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Modifier le profil de {{personne.prenom}} {{personne.nom}} </h2>
+<mat-dialog-content>
+  <form class ='register' [formGroup]='userForm'>
+    <div>
+      <mat-icon matPrefix>person</mat-icon>
+      <mat-form-field>      
+        <input matInput placeholder='Nom' type="text" formControlName="nom" required>
+        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+      </mat-form-field>
+      <mat-icon matPrefix>person</mat-icon>
+      <mat-form-field>
+        <input matInput placeholder='Prénom' type="text" formControlName="prenom" required>
+        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-icon>phone</mat-icon>
+      <mat-form-field>
+        <input matInput type="text" placeholder="01-23-45-67-89 ou 0123456789" formControlName="telPortable">
+      </mat-form-field>
+      <mat-datepicker-toggle [for]="pickerDate"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDate></mat-datepicker>
+      <mat-form-field>      
+        <input matInput [matDatepicker]="pickerDate"  placeholder ='Choisir une date de naissance' formControlName="dateNaissance">
+      </mat-form-field> 
+      <mat-icon>place</mat-icon>
+      <mat-form-field>
+        <input matInput type="text" placeholder ='Adresse' formControlName="adresse">
+      </mat-form-field>
+    </div> 
+    <div>
+      <mat-icon>email</mat-icon>
+      <mat-form-field>    
+        <input matInput placeholder='E-mail' type="text" formControlName="mail" required>
+        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+      </mat-form-field>     
+      <mat-icon>poll</mat-icon>
+      <mat-form-field>    
+        <mat-select placeholder="Status" [(value)]="personne.status" required formControlName="status">
+          <mat-option *ngFor="let item of listeStatus" [value]="item">
+            {{item}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+      </mat-form-field>
+      <mat-checkbox color="primary" formControlName='actif' autocomplete="off">Actif</mat-checkbox>
+    </div>
+      <div>
+        <mat-icon>add_a_photo</mat-icon>
+        <input type="file" placeholder="Image du profil" (change)="selectionFichier($event)" name="avatar" accept="image/*">
+      </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="primary" (click)="annulation()" name="annulation">Annuler
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <button mat-raised-button color="accent" (click)="validation()" name="validation">Valider les modifications 
+      <mat-icon>done</mat-icon>
+  </button> 
+</mat-dialog-actions>

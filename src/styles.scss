@@ -32,12 +32,23 @@ $myTheme: mat-light-theme($myPrimary, $myAccent, $myWarn);
 
 
 .myMatCard{
-    max-width: 125px;
     margin: 1% 1%;
+    width: 163px; 
+}
+
+.myMatCard-desactive{
+    margin: 1% 1%;
+    background-color: lighten(grey, 25%);
+    // width: 152px;
+}
+
+.espaceBoutons{
+    margin-right: 10%;
 }
 
 .imageMatCard{
-    background-size: cover;
+    background-size: cover; 
+    cursor: pointer;
 }
 
 #conteneur{

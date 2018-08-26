@@ -60,7 +60,7 @@ export class SignUpComponent implements OnInit {
       personne.adresse       = formulaire['adresse'];
       personne.telPortable   = formulaire['telPortable'];
       personne.mail          = formulaire['mail'];
-      personne.actif         = 'true';
+      personne.actif         = true;
       personne.status        = 'Parent';
       this.servicePersonne.registerNewPersonne(personne, this.fichier).subscribe(retour=>{
         if (retour){

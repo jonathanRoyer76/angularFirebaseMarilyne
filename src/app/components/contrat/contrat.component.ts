@@ -37,7 +37,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.enfant.prenom        = formulaire['enfantPrenom'];
     this.donneesContrat.enfant.dateNaissance = formulaire['enfantDateNaissance'];
     this.donneesContrat.enfant.status        = 'Enfant';
-    this.donneesContrat.enfant.actif         = 'true';
+    this.donneesContrat.enfant.actif         = true;
     this.donneesContrat.enfant.urlPhoto      = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-enfant.png?alt=media&token=6be070ec-b928-4b9b-b294-dd20ff3590ff';
     // Données mère
     this.donneesContrat.mere.nom         = formulaire['mereNom'];
@@ -45,7 +45,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.mere.mail        = formulaire['mereMail'];
     this.donneesContrat.mere.adresse     = formulaire['mereAdresse'];
     this.donneesContrat.mere.telPortable = formulaire['mereTelPortable'];
-    this.donneesContrat.mere.actif       = 'true';
+    this.donneesContrat.mere.actif       = true;
     this.donneesContrat.mere.status      = 'Parent';
     this.donneesContrat.mere.urlPhoto    = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-femme.png?alt=media&token=4287257a-823d-4fd2-9c3b-efd240998e61';
     // Données père
@@ -54,7 +54,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.pere.mail        = formulaire['pereMail'];
     this.donneesContrat.pere.adresse     = formulaire['pereAdresse'];
     this.donneesContrat.pere.telPortable = formulaire['pereTelPortable'];
-    this.donneesContrat.pere.actif       = 'true';
+    this.donneesContrat.pere.actif       = true;
     this.donneesContrat.pere.status      = 'Parent';
     this.donneesContrat.pere.urlPhoto    = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-homme.png?alt=media&token=6b77087f-3104-496b-94ea-32a783661c13';
     // Données tuteur
@@ -62,7 +62,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.tuteur.prenom      = formulaire['tuteurPrenom'];
     this.donneesContrat.tuteur.telPortable = formulaire['tuteurTelPortable'];
     this.donneesContrat.tuteur.adresse     = formulaire['pereAdresse'];
-    this.donneesContrat.tuteur.actif       = 'true';
+    this.donneesContrat.tuteur.actif       = true;
     this.donneesContrat.tuteur.status      = 'Tuteur';
     this.donneesContrat.tuteur.urlPhoto    = 'https: //firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-homme.svg?alt=media&token=a5d989cd-fae6-404c-a5ec-9ca4293a0786';
     // Données medecin
@@ -70,7 +70,7 @@ export class ContratComponent implements OnInit {
     this.donneesContrat.docteur.prenom      = formulaire['medecinPrenom'];
     this.donneesContrat.docteur.telPortable = formulaire['medecinTelPortable'];
     this.donneesContrat.docteur.adresse     = formulaire['medecinAdresse'];
-    this.donneesContrat.docteur.actif       = 'true';
+    this.donneesContrat.docteur.actif       = true;
     this.donneesContrat.docteur.status      = 'Medecin';
     this.donneesContrat.docteur.urlPhoto    = 'https://firebasestorage.googleapis.com/v0/b/marilyne-angular.appspot.com/o/avatars%2Fdefaut-medecin.png?alt=media&token=4c4b1aff-b05b-4f47-94fe-2047d5495cfb';
     // Données contrat déjà remplies
@@ -132,7 +132,7 @@ export class ContratComponent implements OnInit {
 
   initForm(){
     this.userForm= this.formBuilder.group({
-      enfantNom                 : ['', Validators.required],
+      enfantNom                 : ['', Validators.required], 
       enfantPrenom              : ['', Validators.required],
       enfantDateNaissance       : [''],
       mereNom                   : ['', Validators.required],

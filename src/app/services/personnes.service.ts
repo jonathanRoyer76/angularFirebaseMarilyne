@@ -12,6 +12,8 @@ export class PersonnesService {
   private personneConnecte: Personne = null;
   subjectPersonne         = new Subject<Personne>();
   listePersonnes          = [];
+  filtreAffichage         : boolean
+  subjectFiltre           = new Subject<boolean>()
 
   constructor(
     private serviceError: ErrorHandlerService
@@ -21,8 +23,34 @@ export class PersonnesService {
     this.personneConnecte = new Personne(); 
   }
 
+  // Définit si on affiche les personnes inactives
+  setFiltreAffichagePersonnes(res: boolean){
+    this.filtreAffichage=res;
+    this.emitChangementFiltre();
+  }
+
+  // Emet le signal de changement de filtre
+  emitChangementFiltre(){
+    this.subjectFiltre.next(this.filtreAffichage)
+  }
+
   emitSubjectPersonne(){
     this.subjectPersonne.next(this.personneConnecte);
+  }
+
+  // Mise à jour d'une personne
+  updatePersonne(personne: Personne):Observable<boolean>{
+    return new Observable<boolean>(observer=>{
+      if (personne.idDoc){
+        firebase.firestore().collection('personnes').doc(personne.idDoc).update(JSON.parse(JSON.stringify(personne)))
+        .then(()=>{
+          observer.next(true) 
+        })   
+      }else{
+        this.serviceError.afficheErreur('Erreur dans la mise à jour du profil', 'non trouvé dans la base de données')
+        observer.next(false);
+      }
+    })
   }
 
   //Retourne personneConnecte
@@ -89,13 +117,13 @@ export class PersonnesService {
         },
         ()=>{     
           firebase.storage().ref().child(emplacement).getDownloadURL().then(url=>{            
-          })
-          observer.next('');
+            observer.next(url);
+          })          
         })
       }
     })
   }
-
+ 
   // retourne la liste des personnes enregistrées
   getListePersonnes():Observable<Personne[]>{
     return new Observable<Personne[]>(observer=>{
@@ -103,7 +131,9 @@ export class PersonnesService {
       firebase.firestore().collection('personnes').get().then(snap=>{
         if (snap){
           snap.docs.forEach(temp=>{
-            retour.push(JSON.parse(JSON.stringify(temp.data())))
+            let personne=JSON.parse(JSON.stringify(temp.data()))
+            personne.idDoc=temp.id
+            retour.push(personne)
           })
           observer.next(retour);
         }else observer.next(null);
@@ -129,14 +159,47 @@ export class PersonnesService {
     })
   }
 
+  // Connecte la personne gràce a son mail et sopn mdp
+  connectePersonneByMail(mail: string):Observable<Personne>{
+    return new Observable<Personne>(observer=>{
+      this.getPersonneByMail(mail).subscribe(personne=>{
+        if (personne){
+          this.setPersonneConnecte(personne);
+          observer.next(personne);
+        }else{
+          observer.next(null);
+        }
+      })
+    })    
+  }
+
   // Retrouve une personne en fonction de son mail
   getPersonneByMail(mail: string):Observable<Personne>{
     return new Observable<Personne>(observer=>{
       firebase.firestore().collection('personnes').where('mail','==',mail).get().then(snap=>{
         if (!snap.empty){
-          this.personneConnecte = JSON.parse(JSON.stringify(snap.docs[0].data()))
-          observer.next(this.personneConnecte) 
+          let retour = new Personne()
+          retour = JSON.parse(JSON.stringify(snap.docs[0].data()))
+          retour.idDoc = snap.docs[0].id
+          observer.next(retour) 
         }else observer.next(null)
+      })
+    })
+  }
+
+  // Retrouve une personne en fonction de ses nom et prénom
+  getPersonneByPrenomAndNom(prenom: string, nom: string):Observable<Personne>{
+    return new Observable<Personne>(observer=>{
+      let retour = new Personne();
+      firebase.firestore().collection('personnes').where('prenom','==',prenom).where('nom','==',nom).get().then(snap=>{
+        if (snap){
+          retour=JSON.parse(JSON.stringify(snap.docs[0].data()));
+          retour.idDoc=snap.docs[0].id
+          observer.next(retour);
+        }else{
+          this.serviceError.afficheErreur('Résultat :','Personne n\'est enregistré avec ces noms et prénoms');
+          observer.next(null);
+        }
       })
     })
   }
@@ -154,6 +217,20 @@ export class PersonnesService {
       }
       let emplacement = 'avatars/'+Date.now()+fichier.name;
       let upload = firebase.storage().ref().child(emplacement).put(fichier);
+    })
+  }
+
+  // Desactive une personne
+  changeActif(personne: Personne):Observable<boolean>{
+    return new Observable<boolean>(observer=>{
+      firebase.firestore().collection('personnes').doc(personne.idDoc).update(
+        JSON.parse(JSON.stringify(personne))
+      ).then(()=>{
+        observer.next(true)
+      })
+      .catch(error=>{
+        this.serviceError.afficheErreur('Une erreur s\est produite',error)
+      })
     })
   }
 }

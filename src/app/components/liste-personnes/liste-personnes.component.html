@@ -1,10 +1,42 @@
-<div id="conteneur">
-    <mat-card *ngFor="let temp of listePersonnes" class="myMatCard">
-        <mat-card-header class="myTitleCard">            
-          <mat-card-title>{{temp.prenom}} {{temp.nom}} {{temp.avatar}}</mat-card-title> 
-          <mat-card-subtitle>{{temp.status}}</mat-card-subtitle>
-        </mat-card-header> 
-    <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}">
-        <!-- <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}" alt="Mon image par défaut" /> -->
-    </mat-card>
+<div id="conteneur">  
+    <ng-container *ngFor="let temp of listePersonnes"> 
+        <mat-card class="myMatCard" *ngIf="temp.actif">
+            <mat-card-title-group class="myTitleCard">            
+                <mat-card-title>{{temp.prenom}} {{temp.nom}}</mat-card-title> 
+                <mat-card-subtitle>{{temp.status}}</mat-card-subtitle>
+            </mat-card-title-group> 
+            <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}">
+            <mat-card-actions>
+                <button mat-raised-button color="accent" (click)="onUpdateProfil(temp)"
+                    matTooltip="Voir les détails de la personne">Détails 
+                </button>
+                <button *ngIf="temp.actif" mat-raised-button color="primary" (click)="onDesactiver(temp)"
+                    matTooltip="Désactiver la personne">Désactiver
+                </button>
+                <button *ngIf="!temp.actif" mat-raised-button color="primary" (click)="onActiver(temp)"
+                    matTooltip="Activer la personne">Activer
+                </button> 
+            </mat-card-actions>
+        </mat-card>
+        <ng-container *ngIf="filtre">
+            <mat-card *ngIf="!temp.actif" class="myMatCard" [ngClass]="{'myMatCard-desactive':temp.actif===false}">
+                <mat-card-title-group class="myTitleCard">            
+                    <mat-card-title>{{temp.prenom}} {{temp.nom}}</mat-card-title> 
+                    <mat-card-subtitle>{{temp.status}}</mat-card-subtitle>
+                </mat-card-title-group> 
+                <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}">
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="onUpdateProfil(temp)"
+                        matTooltip="Voir les détails de la personne">Détails 
+                    </button>
+                    <button *ngIf="temp.actif" mat-raised-button color="primary" (click)="onDesactiver(temp)"
+                        matTooltip="Désactiver la personne">Désactiver
+                    </button>
+                    <button *ngIf="!temp.actif" mat-raised-button color="primary" (click)="onActiver(temp)"
+                        matTooltip="Activer la personne">Activer
+                    </button> 
+                </mat-card-actions> 
+            </mat-card>
+        </ng-container>
+    </ng-container>
 </div>

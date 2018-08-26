@@ -26,7 +26,7 @@ export class UsersService {
           this.userConnecte.email       = user.email;  
           this.userConnecte.urlPhoto    = user.photoURL;
           this.userConnecte.isConnected = true;                    
-          this.servicePersonne.getPersonneByMail(user.email).subscribe(personne=>{            
+          this.servicePersonne.connectePersonneByMail(user.email).subscribe(personne=>{           
             if (personne){
               this.userConnecte.status=personne.status
               this.servicePersonne.emitSubjectPersonne();

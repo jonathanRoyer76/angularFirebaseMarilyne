@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UsersService } from '../../services/users.service'
 import { User } from '../../classes/user'
 import { Subscription } from 'rxjs';
+import { PersonnesService } from '../../services/personnes.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -10,11 +11,13 @@ import { Subscription } from 'rxjs';
 })
 export class SideNavComponent implements OnInit, OnDestroy {
 
-  user: User;
-  soucriptionUsers : Subscription
+  user            : User;
+  soucriptionUsers: Subscription
+  chkTous         = false;
 
   constructor(
-    private serviceUsers : UsersService
+    private serviceUsers    : UsersService,
+    private servicePersonnes: PersonnesService
   ) { }
  
   ngOnInit() {    
@@ -24,9 +27,14 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.user=temp;
       }
     );
+    this.servicePersonnes.setFiltreAffichagePersonnes(this.chkTous)
   }
 
   ngOnDestroy(){
     this.soucriptionUsers.unsubscribe();
+  }
+
+  changementFiltre(){
+    this.servicePersonnes.setFiltreAffichagePersonnes(!this.chkTous);
   }
 }
