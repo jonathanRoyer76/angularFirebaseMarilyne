@@ -14,9 +14,10 @@ import { PersonnesService } from '../../services/personnes.service';
 export class UpdatePersonneComponent {
 
   userForm   : FormGroup
+  isAdmin    : boolean
   fichier    : File
   personne   : Personne
-  listeStatus: string[]=['Administrateur', 'Nounou', 'Parent', 'Enfant', 'Tuteur', 'Medecin'];
+  listeStatus: string[] = ['Administrateur', 'Nounou', 'Parent', 'Enfant', 'Tuteur', 'Medecin'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Personne,
@@ -31,6 +32,7 @@ export class UpdatePersonneComponent {
 
   ngOnInit() {
     this.initForm();
+    this.isAdmin=(this.servicePersonne.getPersonneConnecte().status=='Administrateur')? true: false;
   }
 
   initForm(){

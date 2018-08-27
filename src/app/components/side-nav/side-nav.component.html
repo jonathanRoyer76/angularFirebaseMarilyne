@@ -38,10 +38,10 @@
                     </mat-expansion-panel-header>
                     <p>
                         <a routerLink="/personnes">Liste des personnes   </a>
-                        <mat-checkbox name="filtrePersonnes" color="primary" (click)="changementFiltre()" [(ngModel)]="chkTous" autocomplete="off">Afficher les personnes inactives</mat-checkbox> 
+                        <mat-checkbox name="filtrePersonnes" (click)="changementFiltre()" [(ngModel)]="chkTous" autocomplete="off">inactifs</mat-checkbox>  
                     </p>
                     <p>
-                        <a routerLink = "/SignUp">Ajouter une personne</a> 
+                        <a routerLink = "/newPerson">Ajouter une personne</a> 
                     </p>
                     <p>
                         <a routerLink = "/SignUp">Ajouter un utilisateur</a>

@@ -1,14 +1,17 @@
 <div id="conteneur">  
     <ng-container *ngFor="let temp of listePersonnes"> 
         <mat-card class="myMatCard" *ngIf="temp.actif">
+            <!-- <input class="input_hidden" type="file" name="fichier" #fichier> 
+            <button mat-raised-button (click)="fichier.click()" color="accent">TEST</button> -->
             <mat-card-title-group class="myTitleCard">            
-                <mat-card-title>{{temp.prenom}} {{temp.nom}}</mat-card-title> 
+                <mat-card-title>{{temp.prenom}}</mat-card-title> 
+                <mat-card-title>{{temp.nom}}</mat-card-title>
                 <mat-card-subtitle>{{temp.status}}</mat-card-subtitle>
             </mat-card-title-group> 
-            <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}">
+            <img mat-card-image (click)="onUpdateProfil(temp)" class="imageMatCard" src="{{temp.urlPhoto}}">
             <mat-card-actions>
                 <button mat-raised-button color="accent" (click)="onUpdateProfil(temp)"
-                    matTooltip="Voir les détails de la personne">Détails 
+                    matTooltip="Voir les détails de la personne">Détails  
                 </button>
                 <button *ngIf="temp.actif" mat-raised-button color="primary" (click)="onDesactiver(temp)"
                     matTooltip="Désactiver la personne">Désactiver
@@ -21,7 +24,8 @@
         <ng-container *ngIf="filtre">
             <mat-card *ngIf="!temp.actif" class="myMatCard" [ngClass]="{'myMatCard-desactive':temp.actif===false}">
                 <mat-card-title-group class="myTitleCard">            
-                    <mat-card-title>{{temp.prenom}} {{temp.nom}}</mat-card-title> 
+                    <mat-card-title>{{temp.prenom}}</mat-card-title> 
+                    <mat-card-title>{{temp.nom}}</mat-card-title> 
                     <mat-card-subtitle>{{temp.status}}</mat-card-subtitle>
                 </mat-card-title-group> 
                 <img mat-card-image class="imageMatCard" src="{{temp.urlPhoto}}">

@@ -18,8 +18,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class SignUpComponent implements OnInit {
 
-  fichier: File
-  userForm: FormGroup;
+  fichier   : File
+  userForm  : FormGroup;
+  nomFichier: string;
 
   constructor(
     private location       : Location,
@@ -79,7 +80,8 @@ export class SignUpComponent implements OnInit {
   }
 
   selectionFichier(event){
-    this.fichier=event.target.files[0];
+    this.fichier=event.target.files[0];   
+    this.nomFichier=event.target.value  
   }
 
   ngOnInit() {

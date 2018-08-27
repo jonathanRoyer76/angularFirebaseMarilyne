@@ -9,16 +9,6 @@
         <input matInput placeholder='Prénom' type="text" formControlName="prenom" required>
         <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
     </mat-form-field>
-    <mat-icon>vpn_key</mat-icon>
-    <mat-form-field>
-        <input matInput placeholder='Mot de passe' type="password" formControlName="password" required>
-        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
-    </mat-form-field>
-    <mat-icon>vpn_key</mat-icon>
-    <mat-form-field>
-        <input matInput placeholder='Confirmer le mot de passe' type="password" formControlName="confirmPassword" required> 
-        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error> 
-    </mat-form-field>
     <mat-icon>phone</mat-icon>
     <mat-form-field>
         <input matInput type="text" placeholder="01-23-45-67-89 ou 0123456789" formControlName="telPortable">
@@ -34,15 +24,25 @@
     </mat-form-field>
     <mat-icon>email</mat-icon>
     <mat-form-field>    
-        <input matInput placeholder='E-mail' type="text" formControlName="mail" required>
-        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+        <input matInput placeholder='E-mail' type="text" value="" formControlName="mail">
+        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error> 
     </mat-form-field>  
-    <input #fichier class="input_hidden" type="file" placeholder="Image du profil" (change)="selectionFichier($event)" name="avatar" accept="image/*">    
+    <mat-icon>vpn_key</mat-icon> 
+    <mat-form-field >
+        <input matInput placeholder='Mot de passe' type="text" value="" formControlName="password">
+        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
+    </mat-form-field> 
+    <div>
+        <input #fichier class="input_hidden" type="file" placeholder="Image du profil" (change)="selectionFichier($event)" name="avatar" accept="image/*">    
         <mat-icon matTooltip="Choisir une image de profil" (click)="fichier.click()" class="curseur">add_a_photo</mat-icon>
-        <label *ngIf="nomFichier"> {{nomFichier}} </label> 
+        <label *ngIf="nomFichier"> {{nomFichier}} </label>  
+    </div>  
+    <div>
+        <mat-checkbox (click)="changeAcces()" formControlName="accesSite">Créer un utilisateur pour le site</mat-checkbox> 
+    </div> 
     <p>
-        <button mat-raised-button color="primary" [disabled]="userForm.invalid" (click)="validation()" name="validation">Valider l'inscription 
-            <mat-icon>send</mat-icon>
-        </button> 
+      <button mat-raised-button color="primary" [disabled]="userForm.invalid" (click)="validation()" name="validation">Valider l'inscription 
+        <mat-icon>done</mat-icon>
+      </button> 
     </p>
 </form> 

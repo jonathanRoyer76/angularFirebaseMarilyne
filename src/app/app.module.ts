@@ -7,7 +7,7 @@ import { MatCardModule, MatFormFieldModule, MatSidenavModule,
   MatInputModule, MatButtonModule, MatCheckboxModule, MatDividerModule, 
   MatMenuModule, MatIconModule, MatExpansionModule, MatDialogModule, 
   MatSnackBarModule, MatSelectModule, MatTableModule, MatTabsModule, 
-  MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatListModule, MatListItem } from '@angular/material';
+  MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatListModule, MatListItem, MatChip, MatChipsModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ConnexionComponent } from './components/connexion/connexion.component';
@@ -24,9 +24,11 @@ import { ContratComponent } from './components/contrat/contrat.component';
 import { ListeContratsComponent } from './components/liste-contrats/liste-contrats.component';
 import { ListePersonnesComponent } from './components/liste-personnes/liste-personnes.component';
 import { UpdatePersonneComponent } from './components/update-personne/update-personne.component';
+import { AjoutePersonneComponent } from './components/ajoute-personne/ajoute-personne.component';
 
 const mesRoutes = [
   { path: 'signUp', component      : SignUpComponent },
+  { path: 'newPerson', component   : AjoutePersonneComponent },
   { path: 'profilNounou', component: ProfilNounouComponent },
   { path: 'contrat', component     : ContratComponent },
   { path: 'contrats', component    : ListeContratsComponent },
@@ -46,7 +48,8 @@ const mesRoutes = [
     ContratComponent,
     ListeContratsComponent,
     ListePersonnesComponent,
-    UpdatePersonneComponent
+    UpdatePersonneComponent,
+    AjoutePersonneComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule, FormsModule,
@@ -56,7 +59,7 @@ const mesRoutes = [
     MatCheckboxModule, MatCardModule, MatDividerModule, MatMenuModule, MatIconModule,
     MatExpansionModule, MatDialogModule, MatSnackBarModule, MatSelectModule,
     MatTableModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule,
-    MatListModule,
+    MatListModule, MatChipsModule 
   ],
   providers: [
     UsersService,

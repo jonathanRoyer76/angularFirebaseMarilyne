@@ -33,7 +33,7 @@ $myTheme: mat-light-theme($myPrimary, $myAccent, $myWarn);
 
 .myMatCard{
     margin: 1% 1%;
-    width: 163px; 
+    width: 173px; 
 }
 
 .myMatCard-desactive{
@@ -42,12 +42,27 @@ $myTheme: mat-light-theme($myPrimary, $myAccent, $myWarn);
     // width: 152px;
 }
 
+.dimImgAvatar{
+    width : 40px; 
+    height: 40px;
+}
+
+// masque les controles input file
+.input_hidden{
+    display: none;
+} 
+
 .espaceBoutons{
     margin-right: 10%;
 }
 
 .imageMatCard{
     background-size: cover; 
+    cursor: pointer;
+}
+
+// Pour qu'un controle affiche le pointer au survol
+.curseur{
     cursor: pointer;
 }
 

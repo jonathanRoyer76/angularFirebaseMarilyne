@@ -36,14 +36,14 @@
       </mat-form-field>     
       <mat-icon>poll</mat-icon>
       <mat-form-field>    
-        <mat-select placeholder="Status" [(value)]="personne.status" required formControlName="status">
+        <mat-select placeholder="Status" *ngIf="isAdmin" [(value)]="personne.status" required formControlName="status">
           <mat-option *ngFor="let item of listeStatus" [value]="item">
             {{item}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
       </mat-form-field>
-      <mat-checkbox color="primary" formControlName='actif' autocomplete="off">Actif</mat-checkbox>
+      <mat-checkbox color="primary" *ngIf="isAdmin" formControlName='actif' autocomplete="off">Actif</mat-checkbox>
     </div>
       <div>
         <mat-icon>add_a_photo</mat-icon>
