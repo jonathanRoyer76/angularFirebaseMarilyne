@@ -25,7 +25,7 @@
     <mat-icon>email</mat-icon>
     <mat-form-field>    
         <input matInput placeholder='E-mail' type="text" value="" formControlName="mail">
-        <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error> 
+        <mat-hint *ngIf='isAccess'>Champ requis invalide</mat-hint> 
     </mat-form-field>  
     <mat-icon>vpn_key</mat-icon> 
     <mat-form-field >
@@ -33,16 +33,29 @@
         <mat-error *ngIf='userForm.invalid'>Champ requis invalide</mat-error>
     </mat-form-field> 
     <div>
-        <input #fichier class="input_hidden" type="file" placeholder="Image du profil" (change)="selectionFichier($event)" name="avatar" accept="image/*">    
-        <mat-icon matTooltip="Choisir une image de profil" (click)="fichier.click()" class="curseur">add_a_photo</mat-icon>
-        <label *ngIf="nomFichier"> {{nomFichier}} </label>  
-    </div>  
-    <div>
-        <mat-checkbox (click)="changeAcces()" formControlName="accesSite">Créer un utilisateur pour le site</mat-checkbox> 
+        <label>Choisir ou une photo de profil :</label>
+        <div>
+            <input #fichier class="input_hidden" type="file" placeholder="Image du profil" (change)="selectionFichier($event)" name="avatar" accept="image/*">    
+            <mat-icon matTooltip="Choisir une image de profil" (click)="fichier.click()" class="curseur">add_a_photo</mat-icon>
+            <label *ngIf="nomFichier"> {{nomFichier}} </label>  
+        </div>
+        <div>
+            <label>Ou sélectionner un avatar par défaut :</label>
+            <mat-form-field>
+                <mat-select [(value)]="avatar">
+                    <mat-option value="defautHomme">Homme</mat-option>
+                    <mat-option value="defautFemme">Femme</mat-option>
+                    <mat-option value="defautEnfant">Enfant</mat-option>
+                    <mat-option value="defautMedecin">Médecin</mat-option>
+                </mat-select>
+            </mat-form-field>              
+        </div>
     </div> 
     <p>
-      <button mat-raised-button color="primary" [disabled]="userForm.invalid" (click)="validation()" name="validation">Valider l'inscription 
-        <mat-icon>done</mat-icon>
-      </button> 
+        <!-- Désactivé car l'enregistrement d'un nouvel utilisateur entraine sa connexion automatique -->
+        <!-- <mat-checkbox (change)="changeAcces()" id="btnValidation" formControlName="accesSite">Créer un utilisateur pour le site  </mat-checkbox>  -->
+        <button mat-raised-button color="primary" [disabled]="userForm.invalid" (click)="validation()" name="validation">Valider l'inscription 
+            <mat-icon>done</mat-icon> 
+        </button> 
     </p>
 </form> 

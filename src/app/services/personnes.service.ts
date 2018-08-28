@@ -71,26 +71,20 @@ export class PersonnesService {
         this.enregistreAvatar(fichier).subscribe(url=>{
           if (url){
             personne.urlPhoto=url;
-            firebase.firestore().collection('personnes').doc(personne.nom+'_'+personne.prenom).set(
-              JSON.parse(JSON.stringify(personne))).then(()=>{
-                observer.next(true);
-              },
-              (error)=>{
-                this.serviceError.afficheErreur('Erreur survenur lors de l\ajout', error);
-                observer.next(false); 
-            })
           }
-        })        
-        firebase.firestore().collection('personnes').doc(personne.nom+'_'+personne.prenom).set(
-          JSON.parse(JSON.stringify(personne))).then(()=>{
-            observer.next(true);
-          },
-          (error)=>{
-            this.serviceError.afficheErreur('Erreur survenur lors de l\ajout', error);
-            observer.next(false); 
+          // Enregistrement de la personne avec l'url du fichier correspondant
+          firebase.firestore().collection('personnes').doc(personne.idDoc).set(
+            JSON.parse(JSON.stringify(personne))).then(()=>{
+              observer.next(true);
+            },
+            (error)=>{
+              this.serviceError.afficheErreur('Erreur survenur lors de l\ajout', error);
+              observer.next(false); 
+          })
         })
       }else{
-        firebase.firestore().collection('personnes').doc(personne.nom+'_'+personne.prenom).set(
+        // Enregistrement de la personne sans le fichier avatar
+        firebase.firestore().collection('personnes').doc(personne.idDoc).set(
           JSON.parse(JSON.stringify(personne))).then(()=>{
             observer.next(true);
           },

@@ -90,7 +90,7 @@ export class UsersService {
     return new Observable<boolean>((observer)=>{
        firebase.auth().createUserWithEmailAndPassword(user.email, user.mdp).then( 
         (retourUser)=>{
-          user.uidfirebase=retourUser.user.uid;
+          // user.uidfirebase=retourUser.user.uid;
           if (user.urlPhoto!='') this.updatePhotoUser(user)
           observer.next(true);
         },

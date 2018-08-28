@@ -57,6 +57,7 @@ export class SignUpComponent implements OnInit {
       user.mdp      = formulaire['password'];    
       personne.nom           = formulaire['nom'];
       personne.prenom        = formulaire['prenom'];
+      personne.idDoc         = personne.nom+'_'+personne.prenom;
       personne.dateNaissance = formulaire['dateNaissance'];
       personne.adresse       = formulaire['adresse'];
       personne.telPortable   = formulaire['telPortable'];

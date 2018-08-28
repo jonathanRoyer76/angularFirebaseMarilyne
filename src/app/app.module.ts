@@ -7,7 +7,7 @@ import { MatCardModule, MatFormFieldModule, MatSidenavModule,
   MatInputModule, MatButtonModule, MatCheckboxModule, MatDividerModule, 
   MatMenuModule, MatIconModule, MatExpansionModule, MatDialogModule, 
   MatSnackBarModule, MatSelectModule, MatTableModule, MatTabsModule, 
-  MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatListModule, MatListItem, MatChip, MatChipsModule } from '@angular/material';
+  MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatListModule, MatListItem, MatChip, MatChipsModule, MatRadioModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ConnexionComponent } from './components/connexion/connexion.component';
@@ -59,7 +59,7 @@ const mesRoutes = [
     MatCheckboxModule, MatCardModule, MatDividerModule, MatMenuModule, MatIconModule,
     MatExpansionModule, MatDialogModule, MatSnackBarModule, MatSelectModule,
     MatTableModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule,
-    MatListModule, MatChipsModule 
+    MatListModule, MatChipsModule, MatRadioModule
   ],
   providers: [
     UsersService,
